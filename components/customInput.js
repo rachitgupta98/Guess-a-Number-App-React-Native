@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 
-const CustomInput = (props) => {
-  return (
-    <View style={style.input}>
-      <TextInput style={style.input} />
-    </View>
-  );
+const Input = (props) => {
+  return <TextInput {...props} style={{ ...styles.input, ...props.style }} />;
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   input: {
-    flex: 1,
-    marginVertical: 15,
-    alignItems: "center",
-    justifyContent: "center",
+    marginVertical: 10,
+    height: 40,
+    borderBottomWidth: 1,
   },
 });
+export default Input;
