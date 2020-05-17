@@ -10,7 +10,8 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
-*package-lock.json*
+**package-lock.json**
 assets
 # macOS
 .DS_Store
+
