@@ -3,13 +3,13 @@ import { Text, StyleSheet, TouchableOpacity } from "react-native";
 
 const BTN = (props) => {
   return (
-    <TouchableOpacity onPress={props.onBtnPress} style={style.button}>
+    <TouchableOpacity onPress={props.onBtnPress} style={styles.button}>
       <Text style={props.style}>{props.children}</Text>
     </TouchableOpacity>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   button: {
     //borderColor: "grey",
     //backgroundColor: "yellow",
