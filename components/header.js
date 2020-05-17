@@ -3,13 +3,13 @@ import { View, Text, StyleSheet } from "react-native";
 
 const Header = (props) => {
   return (
-    <View style={style.header}>
-      <Text style={style.headerText}>{props.title}</Text>
+    <View style={styles.header}>
+      <Text style={styles.headerText}>{props.title}</Text>
     </View>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   header: {
     height: 80,
     width: "100%",
