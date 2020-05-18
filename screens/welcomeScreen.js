@@ -10,6 +10,7 @@ import {
 import BTN from "../components/customButton";
 import Card from "../components/customCard";
 import Input from "../components/customInput";
+import NumberC from "../components/customNumber";
 const WelcomeScreen = (props) => {
   const [userInput, setUserInput] = useState("");
   const [confirm, setConfirm] = useState(false);
@@ -37,12 +38,18 @@ const WelcomeScreen = (props) => {
   };
   let selectedNumber;
   if (confirm) {
-    selectedNumber = <Text>You Select : {finalValue}</Text>;
+    selectedNumber = (
+      <Card style={styles.numberContainer} elevation={8}>
+        <Text>You Selected</Text>
+        <NumberC>{finalValue}</NumberC>
+        <BTN style={styles.check}>CHECK</BTN>
+      </Card>
+    );
   }
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.welcomeScreen}>
-        <Card style={styles.card}>
+        <Card style={styles.card} elevation={20}>
           <Text>Enter a Number</Text>
 
           <Input
@@ -92,6 +99,12 @@ const styles = StyleSheet.create({
   input: {
     width: 50,
     textAlign: "center",
+  },
+  numberContainer: {
+    alignItems: "center",
+  },
+  check: {
+    color: "#780206",
   },
 });
 
