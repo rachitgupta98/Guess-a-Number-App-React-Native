@@ -11,19 +11,45 @@ export default function App() {
   const [nav, setNav] = useState(false);
   const [endGame, setEndGame] = useState(false);
   const [result, setResult] = useState("");
+  const [count, setCount] = useState(1);
+  const [win, setWin] = useState(true);
   const handleNav = () => {
     computerGuess = NumberGen();
     setNav(true);
   };
-  const handleEndGame = (text) => {
+  const handleEndGame = (text, logic) => {
     setEndGame(true);
     setResult(text);
+    setWin(logic);
+  };
+
+  const onhandleCount = () => {
+    setCount(count + 1);
+  };
+  const onRestart = () => {
+    setEndGame(false);
+    computerGuess = NumberGen();
+    setCount(1);
   };
   let screen = <StartGameScreen onPress={handleNav} />;
   if (nav && !endGame) {
-    screen = <WelcomeScreen value={computerGuess} endGame={handleEndGame} />;
+    screen = (
+      <WelcomeScreen
+        value={computerGuess}
+        endGame={handleEndGame}
+        count={count}
+        changeCount={onhandleCount}
+      />
+    );
   } else if (nav && endGame) {
-    screen = <EndGame title={result} />;
+    screen = (
+      <EndGame
+        title={result}
+        value={computerGuess}
+        restart={onRestart}
+        win={win}
+      />
+    );
   }
 
   return (
