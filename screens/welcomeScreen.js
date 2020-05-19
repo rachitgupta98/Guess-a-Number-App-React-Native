@@ -11,7 +11,12 @@ import BTN from "../components/customButton";
 import Card from "../components/customCard";
 import Input from "../components/customInput";
 import NumberC from "../components/customNumber";
+let count = 0;
+let msg;
 const WelcomeScreen = (props) => {
+  let computerGuess = props.value;
+
+  console.log(computerGuess);
   const [userInput, setUserInput] = useState("");
   const [confirm, setConfirm] = useState(false);
   const [finalValue, setFinalValue] = useState();
@@ -22,7 +27,9 @@ const WelcomeScreen = (props) => {
   const onReset = () => {
     setUserInput("");
     setConfirm(false);
+    msg = "";
   };
+
   const onConfirm = () => {
     let chosenNum = parseInt(userInput);
     if (isNaN(chosenNum) || chosenNum <= 0) {
@@ -34,7 +41,24 @@ const WelcomeScreen = (props) => {
     }
     setFinalValue(chosenNum);
     setConfirm(true);
-    setUserInput("");
+    Keyboard.dismiss();
+  };
+  const onCheck = () => {
+    //console.log(finalValue);
+    count++;
+    //setChances(chance - 1);
+    if (computerGuess == finalValue && count < 3) {
+      props.endGame("Hurray ! You won");
+    } else if (count === 3 && computerGuess != finalValue) {
+      props.endGame("Oops , You Lost");
+    } else {
+      if (computerGuess > finalValue) {
+        msg = `Selected number is Lesser`;
+      } else if (computerGuess < finalValue) {
+        msg = `Selected number is Greater`;
+      }
+    }
+    setChances(chance - 1);
   };
   let selectedNumber;
   if (confirm) {
@@ -42,22 +66,27 @@ const WelcomeScreen = (props) => {
       <Card style={styles.numberContainer} elevation={8}>
         <Text>You Selected</Text>
         <NumberC>{finalValue}</NumberC>
-        <BTN style={styles.check}>CHECK</BTN>
+        <BTN style={styles.check} onBtnPress={onCheck}>
+          CHECK
+        </BTN>
       </Card>
     );
   }
+  //  console.log(allowedChance);
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.welcomeScreen}>
         <Card style={styles.card} elevation={20}>
           <Text>Enter a Number</Text>
-
+          <Text>{chance}</Text>
           <Input
             style={styles.input}
             keyboardType="number-pad"
             maxLength={2}
             value={userInput}
             onChangeText={handleUserInput}
+            editable={!confirm}
+            //onFocus={onReset}
           />
           <View style={styles.buttonView}>
             <BTN style={styles.reset} onBtnPress={onReset}>
@@ -69,6 +98,7 @@ const WelcomeScreen = (props) => {
           </View>
         </Card>
         {selectedNumber}
+        <Text>{msg}</Text>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -102,6 +132,7 @@ const styles = StyleSheet.create({
   },
   numberContainer: {
     alignItems: "center",
+    maxWidth: "80%",
   },
   check: {
     color: "#780206",
