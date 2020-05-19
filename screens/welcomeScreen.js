@@ -11,12 +11,12 @@ import BTN from "../components/customButton";
 import Card from "../components/customCard";
 import Input from "../components/customInput";
 import NumberC from "../components/customNumber";
-let count = 0;
+//let count = 0;
 let msg;
 const WelcomeScreen = (props) => {
   let computerGuess = props.value;
-
-  console.log(computerGuess);
+  //console.log(computerGuess);
+  //console.log(props.count);
   const [userInput, setUserInput] = useState("");
   const [confirm, setConfirm] = useState(false);
   const [finalValue, setFinalValue] = useState();
@@ -38,25 +38,31 @@ const WelcomeScreen = (props) => {
         "Number has to be a number between 1 and 99.",
         [{ text: "OK", style: "destructive", onPress: onReset }]
       );
+    } else {
+      setConfirm(true);
+
+      setFinalValue(chosenNum);
     }
-    setFinalValue(chosenNum);
-    setConfirm(true);
     Keyboard.dismiss();
   };
   const onCheck = () => {
     //console.log(finalValue);
-    count++;
+
+    console.log(props.count + " " + computerGuess + " " + finalValue);
     //setChances(chance - 1);
-    if (computerGuess == finalValue && count < 3) {
-      props.endGame("Hurray ! You won");
-    } else if (count === 3 && computerGuess != finalValue) {
-      props.endGame("Oops , You Lost");
+    if (computerGuess === finalValue && props.count <= 3) {
+      msg = "";
+      props.endGame("Hurray ! You won", true);
+    } else if (props.count === 3 && computerGuess != finalValue) {
+      msg = "";
+      props.endGame("Oops , You Lost", false);
     } else {
       if (computerGuess > finalValue) {
         msg = `Selected number is Lesser`;
       } else if (computerGuess < finalValue) {
         msg = `Selected number is Greater`;
       }
+      props.changeCount();
     }
     setChances(chance - 1);
   };
