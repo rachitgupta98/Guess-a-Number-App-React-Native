@@ -2,21 +2,30 @@
   "expo": {
     "name": "Guess the Number",
     "slug": "guess-number",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/icon.png",
-      "resizeMode": "cover",
+      "resizeMode": "contain",
       "backgroundColor": "#171717"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "sdkVersion": "37.0.0",
+    "description": "You have 6 chances by defaut to guess the correct number, also you can customize the number of chances you required to guess to test yourself.",
+    "githubUrl": "https://github.com/rachitgupta98/Guess-a-Number-App-React-Native"
   }
 }
