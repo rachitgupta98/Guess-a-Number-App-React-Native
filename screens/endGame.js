@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Button, Image } from "react-native";
 import Card from "../components/customCard";
+import BTN from "../components/customButton";
 const EndGame = (props) => {
   let urp;
   if (props.win) {
@@ -9,10 +10,12 @@ const EndGame = (props) => {
     urp = "https://i.postimg.cc/vmsYRXpp/lose.jpg";
   }
   return (
-    <View>
+    <View style={styles.main}>
       <Card elevation={5} style={styles.container}>
-        <Text>{props.title}</Text>
-        <Text>Ans is {props.value}</Text>
+        <Text style={{ fontSize: 18, fontWeight: "bold" }}>{props.title}</Text>
+        <Text style={{ fontSize: 16, fontWeight: "400", color: "green" }}>
+          Ans is {props.value}
+        </Text>
       </Card>
       <View style={styles.imageContainer}>
         <Image
@@ -23,11 +26,16 @@ const EndGame = (props) => {
           resizeMode="cover"
         />
       </View>
-      <Button title="RESTART" onPress={props.restart} />
+      <BTN onBtnPress={props.restart} style={styles.btn}>
+        RESTART
+      </BTN>
     </View>
   );
 };
 const styles = StyleSheet.create({
+  main: {
+    alignItems: "center",
+  },
   container: {
     alignItems: "center",
     width: 200,
@@ -43,6 +51,12 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: "100%",
+  },
+  btn: {
+    backgroundColor: "#2193b0",
+    color: "white",
+    padding: 8,
+    marginVertical: 10,
   },
 });
 export default EndGame;

@@ -20,7 +20,7 @@ const WelcomeScreen = (props) => {
   const [userInput, setUserInput] = useState("");
   const [confirm, setConfirm] = useState(false);
   const [finalValue, setFinalValue] = useState();
-  const [chance, setChances] = useState(3);
+  const [chance, setChances] = useState(6);
   const handleUserInput = (input) => {
     setUserInput(input.replace(/[^0-9]/g, ""));
   };
@@ -48,14 +48,14 @@ const WelcomeScreen = (props) => {
   const onCheck = () => {
     //console.log(finalValue);
 
-    console.log(props.count + " " + computerGuess + " " + finalValue);
+    //console.log(props.count + " " + computerGuess + " " + finalValue);
     //setChances(chance - 1);
-    if (computerGuess === finalValue && props.count <= 3) {
+    if (computerGuess === finalValue && props.count <= 6) {
       msg = "";
-      props.endGame("Hurray ! You won", true);
-    } else if (props.count === 3 && computerGuess != finalValue) {
+      props.endGame("Hurray! You won 👍", true);
+    } else if (props.count === 6 && computerGuess != finalValue) {
       msg = "";
-      props.endGame("Oops , You Lost", false);
+      props.endGame("Oops , You Lost 👎", false);
     } else {
       if (computerGuess > finalValue) {
         msg = `Selected number is Lesser`;
@@ -83,8 +83,8 @@ const WelcomeScreen = (props) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.welcomeScreen}>
         <Card style={styles.card} elevation={20}>
-          <Text>Enter a Number</Text>
-          <Text>{chance}</Text>
+          <Text style={{ fontSize: 15 }}>Enter a Number</Text>
+
           <Input
             style={styles.input}
             keyboardType="number-pad"
@@ -103,8 +103,9 @@ const WelcomeScreen = (props) => {
             </BTN>
           </View>
         </Card>
+        <Text style={{ color: "#302b63" }}>You have {chance} chance</Text>
         {selectedNumber}
-        <Text>{msg}</Text>
+        <Text style={styles.msg}>{msg}</Text>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -119,9 +120,11 @@ const styles = StyleSheet.create({
   },
   reset: {
     color: "red",
+    fontWeight: "600",
   },
   confirm: {
     color: "green",
+    fontWeight: "600",
   },
   buttonView: {
     flexDirection: "row",
@@ -141,7 +144,15 @@ const styles = StyleSheet.create({
     maxWidth: "80%",
   },
   check: {
-    color: "#780206",
+    color: "white",
+    backgroundColor: "lightblue",
+    padding: 6,
+    borderRadius: 40,
+  },
+  msg: {
+    marginVertical: 10,
+    fontSize: 15,
+    color: "#302b63",
   },
 });
 

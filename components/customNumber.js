@@ -10,9 +10,10 @@ const NumberC = (props) => {
 };
 const styles = StyleSheet.create({
   numContainer: {
-    borderWidth: 1,
-    borderColor: "black",
-    backgroundColor: "lightblue",
+    borderWidth: 2,
+    borderColor: "#ffd452",
+    //backgroundColor: "#ffd452",
+    //color: "grey",
     padding: 10,
     borderRadius: 10,
     marginVertical: 10,
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
   },
   number: {
     fontSize: 15,
-    color: "white",
+    color: "grey",
   },
 });
 export default NumberC;
