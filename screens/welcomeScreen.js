@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,9 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  ScrollView,
+  KeyboardAvoidingView,
+  Dimensions,
 } from "react-native";
 import BTN from "../components/customButton";
 import Card from "../components/customCard";
@@ -15,12 +18,11 @@ import NumberC from "../components/customNumber";
 let msg;
 const WelcomeScreen = (props) => {
   let computerGuess = props.value;
-  //console.log(computerGuess);
-  //console.log(props.count);
   const [userInput, setUserInput] = useState("");
   const [confirm, setConfirm] = useState(false);
   const [finalValue, setFinalValue] = useState();
   const [chance, setChances] = useState(6);
+
   const handleUserInput = (input) => {
     setUserInput(input.replace(/[^0-9]/g, ""));
   };
@@ -46,10 +48,6 @@ const WelcomeScreen = (props) => {
     Keyboard.dismiss();
   };
   const onCheck = () => {
-    //console.log(finalValue);
-
-    //console.log(props.count + " " + computerGuess + " " + finalValue);
-    //setChances(chance - 1);
     if (computerGuess === finalValue && props.count <= 6) {
       msg = "";
       props.endGame("Hurray! You won 👍", true);
@@ -80,34 +78,39 @@ const WelcomeScreen = (props) => {
   }
   //  console.log(allowedChance);
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.welcomeScreen}>
-        <Card style={styles.card} elevation={20}>
-          <Text style={{ fontSize: 15 }}>Enter a Number</Text>
+    <ScrollView>
+      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={30}>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <View style={styles.welcomeScreen}>
+            <Card style={styles.card} elevation={20}>
+              <Text style={{ fontSize: 15 }}>Enter a Number</Text>
 
-          <Input
-            style={styles.input}
-            keyboardType="number-pad"
-            maxLength={2}
-            value={userInput}
-            onChangeText={handleUserInput}
-            editable={!confirm}
-            //onFocus={onReset}
-          />
-          <View style={styles.buttonView}>
-            <BTN style={styles.reset} onBtnPress={onReset}>
-              RESET
-            </BTN>
-            <BTN style={styles.confirm} onBtnPress={onConfirm}>
-              CONFIRM
-            </BTN>
+              <Input
+                style={styles.input}
+                keyboardType="number-pad"
+                maxLength={2}
+                value={userInput}
+                onChangeText={handleUserInput}
+                editable={!confirm}
+                //onFocus={onReset}
+              />
+              <View style={styles.buttonView}>
+                <BTN style={styles.reset} onBtnPress={onReset}>
+                  RESET
+                </BTN>
+
+                <BTN style={styles.confirm} onBtnPress={onConfirm}>
+                  CONFIRM
+                </BTN>
+              </View>
+            </Card>
+            <Text style={{ color: "#302b63" }}>You have {chance} chance</Text>
+            {selectedNumber}
+            <Text style={styles.msg}>{msg}</Text>
           </View>
-        </Card>
-        <Text style={{ color: "#302b63" }}>You have {chance} chance</Text>
-        {selectedNumber}
-        <Text style={styles.msg}>{msg}</Text>
-      </View>
-    </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
@@ -117,22 +120,31 @@ const styles = StyleSheet.create({
     alignItems: "center",
     //justifyContent: "center",
     padding: 20,
+    width: "100%",
   },
   reset: {
     color: "red",
     fontWeight: "600",
+    paddingRight: 30,
   },
   confirm: {
     color: "green",
     fontWeight: "600",
+    paddingLeft: 30,
   },
   buttonView: {
     flexDirection: "row",
     justifyContent: "space-between",
+    //width: "70%",
+    // width:
+    //   Dimensions.get("window").width > 500
+    //     ? Dimensions.get("window").width / 3
+    //     : Dimensions.get("window").width / 2.1,
   },
   card: {
-    width: 300,
-    maxWidth: "80%",
+    width: "80%",
+    //maxWidth: "%",
+    minWidth: 300,
     alignItems: "center",
   },
   input: {

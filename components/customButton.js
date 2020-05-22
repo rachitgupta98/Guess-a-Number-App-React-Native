@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 
 const BTN = (props) => {
   return (
@@ -11,12 +11,9 @@ const BTN = (props) => {
 
 const styles = StyleSheet.create({
   button: {
-    //borderColor: "grey",
-    //backgroundColor: "yellow",
-    //paddingRight: 20,
     width: 100,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
 });
 export default BTN;

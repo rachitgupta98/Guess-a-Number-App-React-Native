@@ -1,5 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Image,
+  ScrollView,
+  Dimensions,
+} from "react-native";
 import Card from "../components/customCard";
 import BTN from "../components/customButton";
 const EndGame = (props) => {
@@ -10,36 +18,42 @@ const EndGame = (props) => {
     urp = "https://i.postimg.cc/vmsYRXpp/lose.jpg";
   }
   return (
-    <View style={styles.main}>
-      <Card elevation={5} style={styles.container}>
-        <Text style={{ fontSize: 18, fontWeight: "bold" }}>{props.title}</Text>
-        <Text style={{ fontSize: 16, fontWeight: "400", color: "green" }}>
-          Ans is {props.value}
-        </Text>
-      </Card>
-      <View style={styles.imageContainer}>
-        <Image
-          source={{
-            uri: urp,
-          }}
-          style={styles.image}
-          resizeMode="cover"
-        />
+    <ScrollView>
+      <View style={styles.main}>
+        <Card elevation={5} style={styles.container}>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+            {props.title}
+          </Text>
+          <Text style={{ fontSize: 16, fontWeight: "400", color: "green" }}>
+            Ans is {props.value}
+          </Text>
+        </Card>
+        <View style={styles.imageContainer}>
+          <Image
+            source={{
+              uri: urp,
+            }}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        </View>
+        <BTN onBtnPress={props.restart} style={styles.btn}>
+          RESTART
+        </BTN>
       </View>
-      <BTN onBtnPress={props.restart} style={styles.btn}>
-        RESTART
-      </BTN>
-    </View>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({
   main: {
+    flex: 1,
+    width: Dimensions.get("window").width,
     alignItems: "center",
   },
   container: {
     alignItems: "center",
-    width: 200,
-    maxWidth: "80%",
+
+    width: 250,
   },
   imageContainer: {
     width: 200,
