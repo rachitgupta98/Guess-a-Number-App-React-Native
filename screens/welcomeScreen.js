@@ -118,9 +118,16 @@ const styles = StyleSheet.create({
   welcomeScreen: {
     flex: 1,
     alignItems: "center",
-    //justifyContent: "center",
     padding: 20,
     width: "100%",
+  },
+  buttonView: {
+    flexDirection: "row",
+    //width: "70%",
+    // width:
+    //   Dimensions.get("window").width > 500
+    //     ? Dimensions.get("window").width / 3
+    //     : Dimensions.get("window").width / 2.1,
   },
   reset: {
     color: "red",
@@ -132,15 +139,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     paddingLeft: 30,
   },
-  buttonView: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    //width: "70%",
-    // width:
-    //   Dimensions.get("window").width > 500
-    //     ? Dimensions.get("window").width / 3
-    //     : Dimensions.get("window").width / 2.1,
-  },
+
   card: {
     width: "80%",
     //maxWidth: "%",

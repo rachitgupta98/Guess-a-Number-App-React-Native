@@ -3,7 +3,11 @@ import { Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 
 const BTN = (props) => {
   return (
-    <TouchableOpacity onPress={props.onBtnPress} style={styles.button}>
+    <TouchableOpacity
+      onPress={props.onBtnPress}
+      style={styles.button}
+      accessibilityRole="button"
+    >
       <Text style={props.style}>{props.children}</Text>
     </TouchableOpacity>
   );
@@ -13,7 +17,7 @@ const styles = StyleSheet.create({
   button: {
     width: 100,
     alignItems: "center",
-    justifyContent: "space-between",
+    margin: 10,
   },
 });
 export default BTN;
